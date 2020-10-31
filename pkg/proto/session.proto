@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package mock.session;
+
+option go_package = ".;proto";
+
+service Session {
+  rpc CreateSession (CreateSessionRequest) returns (CreateSessionResponse) {}
+  rpc VerifySession (VerifySessionRequest) returns (VerifySessionResponse) {}
+  rpc GetSessionRoles (GetUserRolesRequest) returns (GetUserRolesResponse) {}
+}
+
+message CreateSessionRequest {
+  string username = 1;
+}
+
+message CreateSessionResponse {
+  string token = 1;
+}
+
+message VerifySessionRequest {
+  string token = 1;
+}
+
+message VerifySessionResponse {
+  bool is_valid = 1;
+}
+
+message GetUserRolesRequest {
+  string username = 1;
+}
+
+message GetUserRolesResponse {
+  repeated Role roles = 1;
+}
+
+message Role {
+  string name = 1;
+}

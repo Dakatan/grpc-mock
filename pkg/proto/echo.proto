@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package mock.echo;
+
+option go_package = ".;proto";
+
+service Echo {
+  rpc Echo1 (EchoRequest) returns (EchoResponse) {}
+  rpc Echo2 (EchoRequest) returns (EchoResponse) {}
+  rpc ChainedEcho (ChainedEchoRequest) returns (EchoResponse) {}
+}
+
+message EchoRequest {
+  string message = 1;
+}
+
+message EchoResponse {
+  string message = 1;
+}
+
+message ChainedEchoRequest {
+  enum EchoType {
+    Echo1 = 0;
+    Echo2 = 1;
+  }
+  EchoType echo_type = 1;
+  EchoRequest echo_request = 2;
+}
